@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AndroidChatEDXCourse</string>
+    <string name="login.message.email">Correo electrónico</string>
+    <string name="login.message.password">Password</string>
+    <string name="login.button.signin">Iniciar sesión</string>
+    <string name="login.button.signup">Crear cuenta</string>
+</resources>
