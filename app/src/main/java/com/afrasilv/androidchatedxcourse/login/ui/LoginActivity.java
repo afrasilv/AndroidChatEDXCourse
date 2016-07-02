@@ -1,4 +1,4 @@
-package com.afrasilv.androidchatedxcourse.login;
+package com.afrasilv.androidchatedxcourse.login.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,12 +15,14 @@ import android.widget.RelativeLayout;
 
 import com.afrasilv.androidchatedxcourse.R;
 import com.afrasilv.androidchatedxcourse.contactlist.ContactListActivity;
+import com.afrasilv.androidchatedxcourse.login.LoginPresenter;
+import com.afrasilv.androidchatedxcourse.login.LoginPresenterImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoginActivity extends AppCompatActivity implements LoginView{
+public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @BindView(R.id.editTxtEmail)
     EditText inputEmail;

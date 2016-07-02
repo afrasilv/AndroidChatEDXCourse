@@ -1,7 +1,7 @@
 package com.afrasilv.androidchatedxcourse.contactlist;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 public class ContactListActivity extends AppCompatActivity {
 

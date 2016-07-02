@@ -1,4 +1,4 @@
-package com.afrasilv.androidchatedxcourse.login;
+package com.afrasilv.androidchatedxcourse.login.ui;
 
 /**
  * Created by alex on 29/06/16.

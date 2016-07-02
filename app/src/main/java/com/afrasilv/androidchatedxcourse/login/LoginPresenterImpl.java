@@ -1,10 +1,9 @@
 package com.afrasilv.androidchatedxcourse.login;
 
-import android.util.Log;
-
 import com.afrasilv.androidchatedxcourse.lib.EventBus;
 import com.afrasilv.androidchatedxcourse.lib.GreenRobotEventBus;
 import com.afrasilv.androidchatedxcourse.login.events.LoginEvent;
+import com.afrasilv.androidchatedxcourse.login.ui.LoginView;
 
 /**
  * Created by alex on 29/06/16.
@@ -87,7 +86,6 @@ public class LoginPresenterImpl implements LoginPresenter{
             loginView.hideProgress();
             loginView.enableInputs();
         }
-        Log.e("LoginPreenterImple", "onFailedToRecoverSession");
     }
 
     private void onSignInSuccess(){

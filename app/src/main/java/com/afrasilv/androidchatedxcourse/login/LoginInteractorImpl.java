@@ -1,7 +1,5 @@
 package com.afrasilv.androidchatedxcourse.login;
 
-import android.util.Log;
-
 /**
  * Created by alex on 29/06/16.
  */
