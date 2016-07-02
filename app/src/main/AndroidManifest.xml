@@ -3,11 +3,12 @@
     package="com.afrasilv.androidchatedxcourse">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".AndroidChatApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".AndroidChatApplication"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".login.LoginActivity">
@@ -17,6 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".contactlist.ContactListActivity"></activity>
     </application>
 
 </manifest>

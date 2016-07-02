@@ -1,5 +1,6 @@
 package com.afrasilv.androidchatedxcourse.domain;
 
+import com.afrasilv.androidchatedxcourse.entities.User;
 import com.firebase.client.AuthData;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -98,7 +99,7 @@ public class FirebaseHelper {
     }
 
     public void signOff(){
-        notifyContactsOfConnectionChange(false, true);
+        notifyContactsOfConnectionChange(User.OFFLINE, true);
     }
 
     private void notifyContactsOfConnectionChange(final boolean online, final boolean signoff) {
