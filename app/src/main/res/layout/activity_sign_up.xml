@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:id="@+id/layoutMainContainer"
-    tools:context=".login.ui.LoginActivity">
+    tools:context=".signup.ui.SignUpActivity">
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             android:ems="10"
             android:id="@+id/editTxtEmail" />
 
-        </android.support.design.widget.TextInputLayout>
+    </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -55,13 +55,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login.button.signin"
-            android:id="@+id/btnSignin" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login.button.gotosignup"
+            android:text="@string/signup.button.signup"
             android:id="@+id/btnSignup" />
     </LinearLayout>
     <ProgressBar

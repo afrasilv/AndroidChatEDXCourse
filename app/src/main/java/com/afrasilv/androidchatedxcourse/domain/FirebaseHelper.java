@@ -1,11 +1,13 @@
 package com.afrasilv.androidchatedxcourse.domain;
 
 import com.afrasilv.androidchatedxcourse.entities.User;
-import com.firebase.client.AuthData;
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,84 +16,103 @@ import java.util.Map;
  * Created by alex on 29/06/16.
  */
 public class FirebaseHelper {
-    private Firebase dataReference;
+    private DatabaseReference dataReference;
     private final static String SEPARATOR = "___";
-    private final static String CHAST_PATH = "chats";
+    private final static String CHATS_PATH = "chats";
     private final static String USERS_PATH = "users";
-    private final static String CONTACTS_PATH = "contacts";
-    private final static String FIREBASE_URL = "https://first-example-app-25e71.firebaseio.com";
+    public final static String CONTACTS_PATH = "contacts";
 
     private static class SingletonHolder {
         private static final FirebaseHelper INSTANCE = new FirebaseHelper();
     }
 
-    public static FirebaseHelper getInstance(){
+    public static FirebaseHelper getInstance() {
         return SingletonHolder.INSTANCE;
     }
 
     public FirebaseHelper(){
-        this.dataReference = new Firebase(FIREBASE_URL);
+        dataReference = FirebaseDatabase.getInstance().getReference();
     }
 
-    public Firebase getDataReference() {
+    public DatabaseReference getDataReference() {
         return dataReference;
     }
 
-    public String getAuthUserEmail(){
-        AuthData authData = dataReference.getAuth();
+    public String getAuthUserEmail() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String email = null;
-        if (authData != null){
-            Map<String, Object> providerData = authData.getProviderData();
-            email = providerData.get("email").toString();
+        if (user != null) {
+            email = user.getEmail();
         }
-
         return email;
     }
 
-    public Firebase getUserReference(String email){
-        Firebase userReference = null;
-        if (email != null){
+    public DatabaseReference getUserReference(String email){
+        DatabaseReference userReference = null;
+        if (email != null) {
             String emailKey = email.replace(".", "_");
             userReference = dataReference.getRoot().child(USERS_PATH).child(emailKey);
         }
         return userReference;
     }
 
-    public Firebase getMyUserReference(){
+    public DatabaseReference getMyUserReference() {
         return getUserReference(getAuthUserEmail());
     }
 
-    public Firebase getContactsReference(String email){
+    public DatabaseReference getContactsReference(String email){
         return getUserReference(email).child(CONTACTS_PATH);
     }
 
-    public Firebase getMyContactsReference(){
+    public DatabaseReference getMyContactsReference(){
         return getContactsReference(getAuthUserEmail());
     }
 
-    public Firebase getOneContactRenference(String mainEmail, String childEmail){
-        String childKey = childEmail.replace(".", "_");
+    public DatabaseReference getOneContactReference(String mainEmail, String childEmail){
+        String childKey = childEmail.replace(".","_");
         return getUserReference(mainEmail).child(CONTACTS_PATH).child(childKey);
     }
 
-    public Firebase getChatsReference(String receiver){
-        String keySender = getAuthUserEmail().replace(".", "_");
-        String keyReceiver = receiver.replace(".", "_");
+    public DatabaseReference getChatsReference(String receiver){
+        String keySender = getAuthUserEmail().replace(".","_");
+        String keyReceiver = receiver.replace(".","_");
 
         String keyChat = keySender + SEPARATOR + keyReceiver;
-        if(keySender.compareTo(keyReceiver) > 0){
+        if (keySender.compareTo(keyReceiver) > 0) {
             keyChat = keyReceiver + SEPARATOR + keySender;
         }
-        return dataReference.getRoot().child(CHAST_PATH).child(keyChat);
+        return dataReference.getRoot().child(CHATS_PATH).child(keyChat);
     }
 
-    public void changeUserConnectionStatus(boolean online){
-        if(getMyUserReference() != null){
+    public void changeUserConnectionStatus(boolean online) {
+        if (getMyUserReference() != null) {
             Map<String, Object> updates = new HashMap<String, Object>();
             updates.put("online", online);
             getMyUserReference().updateChildren(updates);
+
             notifyContactsOfConnectionChange(online);
         }
+    }
+
+    public void notifyContactsOfConnectionChange(final boolean online, final boolean signoff) {
+        final String myEmail = getAuthUserEmail();
+        getMyContactsReference().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot child : snapshot.getChildren()) {
+                    String email = child.getKey();
+                    DatabaseReference reference = getOneContactReference(email, myEmail);
+                    reference.setValue(online);
+                }
+                if (signoff){
+                    FirebaseAuth.getInstance().signOut();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError firebaseError) {
+            }
+        });
     }
 
     public void notifyContactsOfConnectionChange(boolean online) {
@@ -100,27 +121,5 @@ public class FirebaseHelper {
 
     public void signOff(){
         notifyContactsOfConnectionChange(User.OFFLINE, true);
-    }
-
-    private void notifyContactsOfConnectionChange(final boolean online, final boolean signoff) {
-        final String myEmail = getAuthUserEmail();
-        getMyContactsReference().addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot child : dataSnapshot.getChildren()){
-                    String email = child.getKey();
-                    Firebase reference = getOneContactRenference(email, myEmail);
-                    reference.setValue(online);
-                }
-                if(signoff){
-                    dataReference.unauth();
-                }
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
     }
 }

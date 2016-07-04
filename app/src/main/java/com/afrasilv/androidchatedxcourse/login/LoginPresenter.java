@@ -8,6 +8,8 @@ import com.afrasilv.androidchatedxcourse.login.events.LoginEvent;
 public interface LoginPresenter {
     void onCreate();
     void onDestroy();
+    void onPause();
+    void onResume();
     void checkForAuthenticatedUser();
     void validateLogin(String email, String password);
     void registerNewUser(String email, String password);

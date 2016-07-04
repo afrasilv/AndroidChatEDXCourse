@@ -5,6 +5,8 @@ import com.afrasilv.androidchatedxcourse.lib.GreenRobotEventBus;
 import com.afrasilv.androidchatedxcourse.login.events.LoginEvent;
 import com.afrasilv.androidchatedxcourse.login.ui.LoginView;
 
+import org.greenrobot.eventbus.Subscribe;
+
 /**
  * Created by alex on 29/06/16.
  */
@@ -21,13 +23,21 @@ public class LoginPresenterImpl implements LoginPresenter{
 
     @Override
     public void onCreate() {
-        eventBus.register(this);
     }
 
     @Override
     public void onDestroy() {
         loginView = null;
+    }
+
+    @Override
+    public void onPause() {
         eventBus.unRegister(this);
+    }
+
+    @Override
+    public void onResume() {
+        eventBus.register(this);
     }
 
     @Override
@@ -61,6 +71,7 @@ public class LoginPresenterImpl implements LoginPresenter{
     }
 
     @Override
+    @Subscribe
     public void onEventMainThread(LoginEvent event) {
         switch (event.getEventType()){
             case LoginEvent.onSignInSuccess:
