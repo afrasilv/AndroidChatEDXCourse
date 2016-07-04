@@ -2,8 +2,8 @@ package com.afrasilv.androidchatedxcourse.chat.ui;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -54,15 +54,14 @@ public class ChatActivity extends AppCompatActivity
         setContentView(R.layout.activity_chat);
         ButterKnife.bind(this);
 
-        chatPresenter = new ChatPresenterImpl(this);
-        chatPresenter.onCreate();
-
-        setSupportActionBar(toolbar);
-        Intent intent = getIntent();
-        setToolbarData(intent);
-
         setupAdapter();
         setupRecyclerView();
+
+        chatPresenter = new ChatPresenterImpl(this);
+        chatPresenter.onCreate();
+        setToolbarData(getIntent());
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

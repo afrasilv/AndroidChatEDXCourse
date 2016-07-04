@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
 import com.afrasilv.androidchatedxcourse.R;
 import com.afrasilv.androidchatedxcourse.contactlist.ui.OnItemClickListener;
 import com.afrasilv.androidchatedxcourse.domain.AvatarHelper;

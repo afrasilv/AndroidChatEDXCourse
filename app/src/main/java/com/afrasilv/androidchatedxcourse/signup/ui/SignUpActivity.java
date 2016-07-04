@@ -1,14 +1,12 @@
 package com.afrasilv.androidchatedxcourse.signup.ui;
 
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
@@ -102,8 +100,10 @@ public class SignUpActivity extends AppCompatActivity implements LoginView{
 
     @Override
     public void navigateToMainScreen() {
-        startActivity(new Intent(this, ContactListActivity.class));
-    }
+        Intent intent = new Intent(this, ContactListActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);    }
 
     @Override
     public void loginError(String error) {

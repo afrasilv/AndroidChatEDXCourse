@@ -8,7 +8,6 @@ import com.afrasilv.androidchatedxcourse.lib.GreenRobotEventBus;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
-import com.firebase.client.core.view.Event;
 
 public class ContactListRepositoryImpl implements ContactListRepository {
     private EventBus eventBus;

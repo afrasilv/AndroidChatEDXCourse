@@ -12,8 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".login.ui.LoginActivity"
-            android:noHistory="true">
+            android:name=".login.ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,8 +25,16 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".chat.ui.ChatActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".signup.ui.SignUpActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".contactlist.ui.ContactListActivity" />
+        </activity>
+        <activity android:name=".signup.ui.SignUpActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".login.ui.LoginActivity" />
+        </activity>
     </application>
 
 </manifest>
