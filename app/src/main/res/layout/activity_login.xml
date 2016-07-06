@@ -20,7 +20,6 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:hint="@string/login.message.email"
-            android:text="Name"
             android:ems="10"
             android:id="@+id/editTxtEmail" />
 

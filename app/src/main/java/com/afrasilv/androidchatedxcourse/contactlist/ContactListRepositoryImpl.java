@@ -5,9 +5,9 @@ import com.afrasilv.androidchatedxcourse.domain.FirebaseHelper;
 import com.afrasilv.androidchatedxcourse.entities.User;
 import com.afrasilv.androidchatedxcourse.lib.EventBus;
 import com.afrasilv.androidchatedxcourse.lib.GreenRobotEventBus;
-import com.firebase.client.ChildEventListener;
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.FirebaseError;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 
 public class ContactListRepositoryImpl implements ContactListRepository {
     private EventBus eventBus;
@@ -45,9 +45,8 @@ public class ContactListRepositoryImpl implements ContactListRepository {
                 }
 
                 @Override
-                public void onCancelled(FirebaseError firebaseError) {
+                public void onCancelled(DatabaseError firebaseError) {}
 
-                }
 
               };
         }

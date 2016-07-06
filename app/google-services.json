@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "518062743161",
+    "firebase_url": "https://first-example-app-25e71.firebaseio.com",
+    "project_id": "first-example-app-25e71",
+    "storage_bucket": "first-example-app-25e71.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518062743161:android:14cce44a03dccbfb",
+        "android_client_info": {
+          "package_name": "com.afrasilv.androidchatedxcourse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "518062743161-71h9uka5im3hvghetro9u9g064leitrb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtp7Wa2f4fiVQzbOpmPwAUh1x9anNWXUI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

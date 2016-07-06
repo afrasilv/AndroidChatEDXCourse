@@ -15,6 +15,12 @@ public class User {
     public User() {
     }
 
+    public User(String email, boolean online, Map<String, Boolean> contacts){
+        this.email = email;
+        this.online = online;
+        this.contacts = contacts;
+    }
+
     public String getEmail() {
         return email;
     }
